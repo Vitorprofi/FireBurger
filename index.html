@@ -1,317 +1,357 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FireBurger Premium</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dany Burguer</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins', sans-serif;
+    }
+
+    body{
+        background:#000;
+        color:white;
+    }
+
+    /* ======== FUNDO ANIMADO ======== */
+    .fundo{
+        position:fixed;
+        top:0; left:0;
+        width:100%; height:100%;
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        filter:brightness(0.3);
+        z-index:-1;
+        animation:mexer 12s infinite alternate ease-in-out;
+    }
+
+    @keyframes mexer {
+        0% { transform:scale(1); }
+        100% { transform:scale(1.15); }
+    }
+
+    /* ======== HEADER ======== */
+    header{
+        width:100%;
+        padding:15px 20px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        background:rgba(0,0,0,0.6);
+        backdrop-filter:blur(8px);
+        position:fixed;
+        top:0; left:0;
+        z-index:10;
+    }
+
+    header img{
+        height:70px;
+        border-radius:60px;
+        max-width:100%;
+    }
+
+    nav{
+        display:flex;
+        gap:20px;
+    }
+
+    nav a{
+        color:white;
+        text-decoration:none;
+        font-size:1rem;
+        transition:.3s;
+    }
+
+    nav a:hover{
+        color:#b552ff;
+    }
+
+    /* ======== HERO ======== */
+    .hero{
+        text-align:center;
+        padding:150px 20px 100px;
+    }
+
+    .hero h1{
+        font-size: clamp(32px, 7vw, 60px);
+        color:#b552ff;
+        text-shadow:0 0 20px #8f00ff;
+    }
+
+    .hero p{
+        margin-top:15px;
+        font-size: clamp(16px, 3.5vw, 20px);
+    }
+
+    .btn{
+        display:inline-block;
+        margin-top:30px;
+        padding:12px 30px;
+        background:linear-gradient(90deg,#8f00ff,#d400ff);
+        border-radius:40px;
+        font-size:18px;
+        font-weight:700;
+        color:#fff;
+        text-decoration:none;
+        box-shadow:0 0 25px #9f00ff;
+        transition:.3s;
+    }
+
+    .btn:hover{
+        transform:scale(1.08);
+        box-shadow:0 0 40px #e100ff;
+    }
+
+    /* ======== MENU ======== */
+    .menu{
+        padding:80px 20px;
+        text-align:center;
+    }
+
+    .menu h2{
+        font-size: clamp(28px, 6vw, 45px);
+        color:#b552ff;
+        text-shadow:0 0 20px #8f00ff;
+        margin-bottom:35px;
+    }
+
+    .produtos{
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+        gap:25px;
+    }
+
+    .item{
+        padding:20px;
+        background:#110011;
+        border-radius:20px;
+        box-shadow:0 0 15px #8f00ff;
+        transition:.3s;
+    }
+
+    .item:hover{
+        transform:translateY(-7px);
+        box-shadow:0 0 25px #d400ff;
+    }
+
+    .item img{
+        width:100%;
+        height:180px;
+        object-fit:cover;
+        border-radius:15px;
+        margin-bottom:15px;
+    }
+
+    .item h3{
+        font-size:22px;
+        margin-bottom:10px;
+        color:#d87cff;
+    }
+
+    .item p{
+        font-size:15px;
+        margin-bottom:10px;
+    }
+
+    .preco{
+        font-size:20px;
+        font-weight:700;
+        color:#ff66ff;
+    }
+
+    /* ======== CONTATO ======== */
+    .contato{
+        text-align:center;
+        padding:60px 20px;
+    }
+
+    .contato h2{
+        font-size: clamp(28px, 6vw, 40px);
+        color:#b552ff;
+        margin-bottom:20px;
+    }
+
+    .zap{
+        display:inline-block;
+        padding:15px 35px;
+        font-size:20px;
+        background:#25D366;
+        color:#000;
+        font-weight:700;
+        border-radius:40px;
+        text-decoration:none;
+        box-shadow:0 0 20px #25D366;
+        transition:.3s;
+    }
+
+    .zap:hover{
+        transform:scale(1.1);
+        box-shadow:0 0 30px #2cff78;
+    }
+
+    /* ======== MAPA ======== */
+    .mapa{
+        padding:60px 20px;
+        text-align:center;
+    }
+
+    .mapa h2{
+        font-size: clamp(28px, 6vw, 40px);
+        margin-bottom:25px;
+        color:#d4af37;
+    }
+
+    .mapa iframe{
+        width:100%;
+        max-width:900px;
+        height:450px;
+        border:0;
+        border-radius:20px;
+        box-shadow:0 0 20px #d4af37;
+    }
+
+    /* BOTÃO FLUTUANTE INSTAGRAM */
+    .instagram-btn{
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 65px;
+        height: 65px;
+        background: radial-gradient(circle, #ff00f7, #8f00ff);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 18px #b300ff;
+        cursor: pointer;
+        z-index: 999;
+        transition: .3s;
+    }
+
+    .instagram-btn img{
+        width: 35px;
+        height: 35px;
+        filter: drop-shadow(0 0 5px #fff);
+    }
+
+    .instagram-btn:hover{
+        transform: scale(1.12);
+        box-shadow: 0 0 28px #ff00f7;
+    }
+
+    /* ======== RESPONSIVIDADE DO HEADER ======== */
+    @media(max-width:650px){
+        nav{
+            gap:12px;
         }
-
-        body {
-            color: #fff;
-            overflow-x: hidden;
-            background: #0a0a0a;
+        nav a{
+            font-size:14px;
         }
-
-        /* FUNDO ANIMADO DE FUMAÇA */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/7yK7Fjg.png');
-            background-size: cover;
-            opacity: 0.25;
-            animation: smoke 22s infinite linear;
-            z-index: -2;
+        header img{
+            height:55px;
         }
+    }
 
-        @keyframes smoke {
-            from { transform: translateX(0); }
-            to { transform: translateX(-1000px); }
+    /* Ajuste do botão do Instagram para não tampar conteúdo */
+    @media(max-width:500px){
+        .instagram-btn{
+            width:55px;
+            height:55px;
+            bottom:18px;
+            right:18px;
         }
-
-        /* GRADIENTE ESCURO PARA DAR PROFUNDIDADE */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.95));
-            z-index: -1;
+        .instagram-btn img{
+            width:28px;
+            height:28px;
         }
+    }
 
-        /* HEADER */
-        header {
-            width: 100%;
-            padding: 25px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(8px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-
-        header h1 {
-            font-size: 36px;
-            color: #ff8400;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        header nav a {
-            margin-left: 30px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #ffffff;
-            transition: 0.3s;
-        }
-
-        header nav a:hover {
-            color: #ff8400;
-        }
-
-        /* HERO */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            padding: 0 7%;
-        }
-
-        .hero-text {
-            max-width: 550px;
-            animation: fadeIn 1.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-text h2 {
-            font-size: 62px;
-            font-weight: 800;
-            line-height: 1.1;
-            color: #ffffff;
-        }
-
-        .hero-text span {
-            color: #ff8400;
-        }
-
-        .hero-text p {
-            margin-top: 20px;
-            font-size: 20px;
-            color: #e0e0e0;
-        }
-
-        .btn {
-            margin-top: 35px;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #ff8400, #ffad42);
-            color: #000;
-            font-weight: 600;
-            font-size: 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s;
-            box-shadow: 0 0 20px rgba(255, 132, 0, 0.7);
-        }
-
-        .btn:hover {
-            transform: scale(1.07);
-        }
-
-        /* IMAGEM HERO */
-        .hero img {
-            width: 520px;
-            filter: drop-shadow(0 0 25px #ff8400);
-            animation: float 3.5s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* PRODUTOS */
-        .produtos {
-            padding: 120px 6%;
-            background: #0a0a0a;
-            text-align: center;
-        }
-
-        .produtos h2 {
-            font-size: 46px;
-            color: #ff8400;
-            margin-bottom: 50px;
-        }
-
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .card {
-            background: #111;
-            padding: 25px;
-            border-radius: 18px;
-            overflow: hidden;
-            transition: 0.3s;
-            border: 1px solid #222;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 22px #ff84008f;
-        }
-
-        .card img {
-            width: 100%;
-            border-radius: 12px;
-        }
-
-        .card h3 {
-            margin: 18px 0;
-            font-size: 26px;
-            color: #ffad42;
-        }
-
-        .card p {
-            color: #dcdcdc;
-            font-size: 16px;
-        }
-
-        /* FOOTER */
-        footer {
-            margin-top: 120px;
-            text-align: center;
-            padding: 25px;
-            background: #000;
-            font-size: 16px;
-            color: #aaa;
-        }
-    
-        /* RESPONSIVIDADE */
-        @media (max-width: 900px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 120px;
-            }
-            .hero img {
-                width: 330px;
-            }
-            .hero-text h2 {
-                font-size: 42px;
-            }
-            .hero-text p {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 26px;
-            }
-            header nav a {
-                font-size: 16px;
-                margin-left: 15px;
-            }
-
-            .produtos h2,
-            .contato h2 {
-                font-size: 32px;
-            }
-
-            form input,
-            form textarea {
-                font-size: 15px !important;
-            }
-
-            .btn {
-                font-size: 18px;
-                padding: 12px 30px;
-            }
-        }
-    </style>
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>🔥 FireBurger</h1>
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#cardapio">Cardápio</a>
-            <a href="#contato">Contato</a>
-        </nav>
-    </header>
+<div class="fundo" style="background-image:url('fundo.png');"></div>
 
-    <section class="hero" id="inicio">
-        <div class="hero-text">
-            <h2>O Hambúrguer <span>Premium</span><br>Que Você Merece</h2>
-            <p>Suculência, crocância e explosão de sabor. Ingredientes frescos, carne artesanal e molhos exclusivos para uma experiência única.</p>
-            <a href="#cardapio" class="btn">Explorar Cardápio</a>
+<header>
+    <img src="imagemdanyburger.jpg" alt="Logo Dany Burguer">
+    <nav>
+        <a href="#hero">Início</a>
+        <a href="#menu">Cardápio</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="hero" id="hero">
+    <h1>Dany Burguer</h1>
+    <p>Os melhores lanches da cidade — sabor que conquista desde 2013!</p>
+    <a href="#menu" class="btn">Ver Cardápio</a>
+</section>
+
+<section class="menu" id="menu">
+    <h2>Cardápio</h2>
+
+    <div class="produtos">
+
+        <div class="item">
+            <img src="https://imgs.search.brave.com/2ibnDl21moaZ_e7_ty9oV2Vr4jtrRIXM_jlN7_doAL4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAzLzk2LzEwLzA4/LzM2MF9GXzM5NjEw/MDg1OV9LemtsMmZ4/OG43V3o5aHo1dzND/MXRCbVNheDNzRU5w/Ty5qcGc" alt="X-Burguer">
+            <h3>X-Burguer</h3>
+            <p>Pão, hambúrguer artesanal, queijo e maionese da casa.</p>
+            <span class="preco">R$ 18,00</span>
         </div>
 
-        <img src="https://i.imgur.com/nMZxH0f.png" alt="Hambúrguer Premium">
-    </section>
-
-    <section class="produtos" id="cardapio">
-        <h2>Cardápio Exclusivo</h2>
-
-        <div class="card-container">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1601050690597-df7bbacf0b64?auto=format&fit=crop&w=900&q=80">
-                <h3>Fire Classic</h3>
-                <p>Pão brioche, carne 180g, cheddar cremoso, cebola caramelizada e maionese especial.</p>
-            </div>
-
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1551782450-17144efb9c50?auto=format&fit=crop&w=900&q=80">
-                <h3>Smash Bacon</h3>
-                <p>Dois smashes 100g, cheddar duplo, bacon crocante e molho defumado.</p>
-            </div>
-
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=900&q=80">
-                <h3>Double Cheddar</h3>
-                <p>Carne dupla 160g, cheddar extra, picles artesanal e pão tostado.</p>
-            </div>
+        <div class="item">
+            <img src="https://imgs.search.brave.com/xkn_NkMSk131pme2JTARj-c3xDGlYb-QVK-N2kGPMd8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzRjLzE3/Lzc3LzRjMTc3N2Q0/MTA1YjlmZTg4N2Ez/M2JlYTU2YzMxODJl/LmpwZw" alt="X-Salada">
+            <h3>X-Salada</h3>
+            <p>Hambúrguer artesanal, queijo, alface, tomate e maionese.</p>
+            <span class="preco">R$ 20,00</span>
         </div>
-    </section>
 
-        <section class="contato" id="contato" style="padding:120px 6%; text-align:center; background:#0a0a0a;">
-        <h2 style="font-size:46px; color:#ff8400; margin-bottom:40px;">Entre em Contato</h2>
-        <form style="max-width:550px; margin:auto; display:flex; flex-direction:column; gap:20px;">
-            <input type="text" placeholder="Seu nome" required style="padding:15px; border-radius:10px; border:none; background:#111; color:#fff; font-size:17px;">
-            <input type="email" placeholder="Seu email" required style="padding:15px; border-radius:10px; border:none; background:#111; color:#fff; font-size:17px;">
-            <textarea placeholder="Sua mensagem" rows="5" required style="padding:15px; border-radius:10px; border:none; background:#111; color:#fff; font-size:17px;"></textarea>
-            <a href="https://wa.me/5515996236336" target="_blank" style="padding:15px; background:linear-gradient(45deg, #ff8400, #ffad42); border:none; color:#000; font-size:20px; font-weight:600; border-radius:10px; cursor:pointer; transition:0.3s;">Enviar no WhatsApp</a>
-        </form>
-    </section>
+        <div class="item">
+            <img src="https://imgs.search.brave.com/xqry9IZUEhL7YXhBYkVdLYHqUhGGmHt8KwnJUZCeQC0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtZ3JhdGlz/L3NhbmR1aWNoZS1n/cmFuZGUtaGFtYnVy/Z3Vlci1oYW1idXJn/dWVyLWNvbS1jYXJu/ZS1jZWJvbGEtcm94/YS10b21hdGUtZS1i/YWNvbi1mcml0b18y/ODI5LTUzNzkuanBn/P3NlbXQ9YWlzX2h5/YnJpZA" alt="X-Bacon">
+            <h3>X-Bacon</h3>
+            <p>Muito bacon crocante + queijo + molho especial.</p>
+            <span class="preco">R$ 26,00</span>
+        </div>
 
-<footer>
-        © 2025 FireBurger Premium — Todos os direitos reservados
-    </footer>
+        <div class="item">
+            <img src="https://imgs.search.brave.com/sL1bpgaylpGpbrg1Njeqhv1pqlk5uflplEqfwiEbgAo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtZ3JhdGlz/L3ZpZGEtbW9ydGEt/ZGUtdW0tZGVsaWNp/b3NvLWhhbWJ1cmd1/ZXItYW1lcmljYW5v/XzIzLTIxNDk2Mzcz/MDYuanBnP3NlbXQ9/YWlzX2h5YnJpZCZ3/PTc0MCZxPTgw" alt="Combo">
+            <h3>Combo Clássico</h3>
+            <p>Lanche + Batata + Refrigerante.</p>
+            <span class="preco">R$ 32,00</span>
+        </div>
+
+    </div>
+</section>
+
+<section class="contato" id="contato">
+    <h2>Fale Conosco</h2>
+    <a class="zap" href="https://wa.me/55XXXXXXXXXX">Chamar no WhatsApp</a>
+</section>
+
+<section class="mapa">
+    <h2>Localização</h2>
+
+    <div style="position:relative;width:100%;max-width:700px;margin:0 auto;padding-bottom:50%;height:0;overflow:hidden;border-radius:20px;box-shadow:0 0 20px #d4af37;">
+        <iframe
+            src="https://www.google.com/maps?q=Avenida+Professora+Izoraida+Marques+Peres+401,+Sorocaba+SP&output=embed"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+            loading="lazy">
+        </iframe>
+    </div>
+
+</section>
+
+<a href="https://instagram.com/SEU_USUARIO" target="_blank" class="instagram-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+</a>
 
 </body>
 </html>
